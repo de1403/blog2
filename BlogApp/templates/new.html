@@ -1,0 +1,13 @@
+
+<h1>새 글 작성하기</h1>
+
+
+
+<form method ='POST' action ='' enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    
+    <input class= "btn btn=dark" type="submit" value="저장">
+</form>
