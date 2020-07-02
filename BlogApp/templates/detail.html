@@ -3,7 +3,7 @@
 <h1>제목:{{blog.title}}</h1>
 
 <br>
-
+<p>{{likes}} 좋아요 수</p>
 <p>{{blog.pub_date}}</p>
 
 
@@ -23,3 +23,50 @@
 <a href="{%url 'delete' blog.id %}">삭제하기</a>
 <br>
 <a href="{%url 'home'  %}">목록가기</a>
+
+<hr>
+
+{% for comment in comments %}
+<!-- <br> 작성자:{{comment.author}}
+<br> 내용: {{comment.body}}
+<br> {{comment.pub_date}}
+<br> -->
+
+<div class="card">
+    <div class="card-header">
+        작성자:{{comment.author}}
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>내용: {{comment.body}}</p>
+        <footer class="blockquote-footer">{{comment.pub_date}} <cite title="Source Title"></cite></footer>
+      </blockquote>
+    </div>
+  </div>
+
+<div class="card">
+    <div class="card-body">
+        <br> 
+        <br> 
+        <br> 
+        <br>
+    </div>
+</div>
+
+{% endfor %}
+
+<form action="/blog/commenting/{{blog.id}}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="body">
+    <button type="submit">작성</button>
+</form>
+
+<form action="/blog/like/{{blog.id}}" method="get">
+
+    <button type="submit" class="btn btn-primary">좋아요</button>
+</form>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
